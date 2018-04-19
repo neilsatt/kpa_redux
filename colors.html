@@ -20,6 +20,7 @@
           }
         }
         
+        // reducer function - sets the store's new state
         function favoriteColors(state, action) {
           if (state === undefined) {
             state = [];
@@ -35,7 +36,27 @@
             return state;
           }
         }
+        
+        var store = Redux.createStore(favoriteColors);
+        
+        // the dispatch call sends an action to our reducer
+        store.dispatch(addColor("blue"));
+        store.dispatch(addColor("yellow"));
+        store.dispatch(addColor("green"));
+        store.dispatch(addColor("red"));
+        store.dispatch(addColor("gray"));
+        store.dispatch(addColor("orange"));
+        store.dispatch(removeColor("gray"));
    
+        console.log(store.getState());
+        
+        // The subscribe method allows you to specify a listener (method), 
+        // that gets called each time the store gets modified. 
+        store.subscribe(render);
+ 
+        function render() {
+          console.log(store.getState());
+        }
     </script>
   </body>
 </html>
